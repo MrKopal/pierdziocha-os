@@ -3,10 +3,10 @@
 # image will be published to ghcr.io/<user>/<name>
 name: pierdziocha-os
 # description will be included in the image's metadata
-description: This is my personal OS image.
+description: DLa mojej ukochanej pierdzioszki.
 
 # the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
+base-image: ghcr.io/ublue-os/base-main
 image-version: latest # You can pin to a specific version of Fedora as well
 
 # module configuration, executed in order
@@ -21,10 +21,17 @@ modules:
     repos:
       copr:
         - atim/starship
+    
+    group-install:
+      packages:
+        - cinnamon-desktop
     install:
       packages:
         - micro
         - starship
+        - lighdm
+        - stick-greeter
+        - stick-greeter-cinammon
     remove:
       packages:
         # example: removing firefox (in favor of the flatpak)

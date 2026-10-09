@@ -31,7 +31,6 @@ modules:
         - starship
         - lightdm
         - slick-greeter
-        - slick-greeter-cinammon
     remove:
       packages:
         # example: removing firefox (in favor of the flatpak)

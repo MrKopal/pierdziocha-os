@@ -47,9 +47,6 @@ modules:
     - mangohud
     - fastfetch
     - initial-setup-gui
-    - cinammon-desktop
-    - cinammon-session
-    - cinammon
     - cinnamon
     - cinnamon-session
     - cinnamon-desktop

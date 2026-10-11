@@ -21,17 +21,7 @@ modules:
     repos:
       copr:
         - atim/starship
-
-  - type: systemd
-    system:
-      enabled:
-        - initial-setup.service
-        - pierdziocha-autologin.service
-        - pierdziocha-update.timer
-        - pierdziocha-flatpak-update.timer
-      masked:
-        - bootc-fetch-apply-updates.timer
-
+    
     group-install:
       packages:
         - cinnamon-desktop
@@ -50,6 +40,16 @@ modules:
         - mangohud
         - fastfetch
         - initial-setup-gui
+  - type: systemd
+    system:
+      enabled:
+        - initial-setup.service
+        - pierdziocha-autologin.service
+        - pierdziocha-update.timer
+        - pierdziocha-flatpak-update.timer
+      masked:
+        - bootc-fetch-apply-updates.timer
+
 
     remove:
       packages:

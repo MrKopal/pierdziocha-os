@@ -49,6 +49,7 @@ modules:
         - gamemode
         - mangohud
         - fastfetch
+        - initial-setup-gui
 
     remove:
       packages:

@@ -16,6 +16,7 @@ StandardOutput=tty
 StandardError=tty
 TTYPath=/dev/tty1
 TTYReset=yes
+TTYVTDisallocate=yes
 TTYVHangup=yes
 TimeoutStartSec=0
 

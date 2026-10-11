@@ -5,6 +5,8 @@ set -euo pipefail
 # No username/password is ever baked into the container image.
 
 exec </dev/tty1 >/dev/tty1 2>&1
+# Reset the visible TTY before prompting; does not affect the journal.
+printf '\033[2J\033[H\033[?25h'
 printf '\n\n===========================================\n'
 printf ' Pierdziocha OS - pierwsza konfiguracja\n'
 printf '===========================================\n\n'

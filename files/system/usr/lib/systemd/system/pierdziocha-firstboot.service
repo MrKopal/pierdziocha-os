@@ -1,0 +1,21 @@
+[Unit]
+Description=Pierdziocha OS - create first user before LightDM
+After=local-fs.target systemd-tmpfiles-setup.service
+Before=display-manager.service
+Conflicts=getty@tty1.service
+RequiresMountsFor=/var/home
+ConditionPathExists=!/var/lib/pierdziocha/firstboot-complete
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/bash /usr/libexec/pierdziocha-firstboot.sh
+StandardInput=tty-force
+StandardOutput=tty
+StandardError=tty
+TTYPath=/dev/tty1
+TTYReset=yes
+TTYVHangup=yes
+TimeoutStartSec=0
+
+[Install]
+WantedBy=graphical.target

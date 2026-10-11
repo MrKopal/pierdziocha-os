@@ -1,93 +1,92 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-# image will be published to ghcr.io/<user>/<name>
 name: pierdziocha-os
-# description will be included in the image's metadata
 description: DLa mojej ukochanej pierdzioszki.
-
-# the base image to build on top of (FROM) and the version tag to use
 base-image: ghcr.io/ublue-os/base-main
-image-version: latest # You can pin to a specific version of Fedora as well
-
-# module configuration, executed in order
-# you can include multiple instances of the same module
+image-version: latest
 modules:
-  - type: files
-    files:
-      - source: system
-        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
-
-
-  - type: dnf
-    repos:
-      copr:
-        - atim/starship
-    
-    group-install:
-      packages:
-        - cinnamon-desktop
+- type: files
+  files:
+  - source: system
+    destination: /
+- type: dnf
+  remove:
+    auto-remove: false
+    packages:
+    - firefox
+    - firefox-langpacks
+    - gnome-software
+    - thunderbird
+    - gnome-abrt
+    - gnome-calculator
+    - gnome-calendar
+    - gnome-system-monitor
+    - gnome-terminal
+    - gnome-screenshot
+    - yelp
+    - f44-backgrounds-gnome
+- type: dnf
+  repos:
+    copr:
+    - atim/starship
+  group-install:
+    packages:
+    - cinnamon-desktop
+  install:
+    packages:
+    - micro
+    - starship
+    - lightdm
+    - slick-greeter
+    - kitty
+    - flameshot
+    - mate-calc
+    - adw-gtk3-theme
+    - dconf-editor
+    - gamemode
+    - mangohud
+    - fastfetch
+    - initial-setup-gui
+    - cinammon-desktop
+    - cinammon-session
+    - cinammon
+    - cinnamon
+    - cinnamon-session
+    - cinnamon-desktop
+    - nemo
+    - shadow-utils
+    - passwd
+- type: gschema-overrides
+  include:
+  - zz1-pierdziocha.gschema.override
+- type: default-flatpaks
+  configurations:
+  - notify: true
+    scope: system
     install:
-      packages:
-        - micro
-        - starship
-        - lightdm
-        - slick-greeter
-        - kitty
-        - flameshot
-        - mate-calc
-        - adw-gtk3-theme
-        - dconf-editor
-        - gamemode
-        - mangohud
-        - fastfetch
-        - initial-setup-gui
-
-    remove:
-      packages:
-        # example: removing firefox (in favor of the flatpak)
-        # "firefox" is the main package, "firefox-langpacks" is a dependency
-        - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-        - gnome-software
-        - thunderbird
-        - gnome-abrt
-        - gnome-calculator
-        - gnome-calendar
-        - gnome-system-monitor
-        - gnome-terminal
-        - gnome-screenshot
-        - yelp
-        - f44-backgrounds-gnome
-  - type: systemd
-    system:
-      enabled:
-        - initial-setup.service
-        - pierdziocha-autologin.service
-        - pierdziocha-update.timer
-        - pierdziocha-flatpak-update.timer
-      masked:
-        - bootc-fetch-apply-updates.timer
-
-  - type: gschema-overrides
-    include:
-      - zz1-pierdziocha.gschema.override
-  - type: default-flatpaks
-    configurations:
-      - notify: true # Send notification after install/uninstall is finished (true/false)
-        scope: system
-        # If no repo information is specified, Flathub will be used by default
-        install: # system flatpaks we want all users to have and not remove
-          - org.mozilla.firefox
-          - io.github.kolunmi.Bazaar
-          - io.missioncenter.MissionCenter
-          - com.github.tchx84.Flatseal
-          - com.valvesoftware.Steam
-          - org.vinegarhq.Sober
-          - net.davidotek.pupgui2
-      - scope: user # Also add Flathub user repo, but no user packages
-  - type: chezmoi
-    repository: https://github.com/mrkopal/pierdziocha-os
-    disable-update: true
-    file-conflict-policy: skip
-
-  - type: signing # this sets up the proper policy & signing files for signed images to work fully
+    - org.mozilla.firefox
+    - io.github.kolunmi.Bazaar
+    - io.missioncenter.MissionCenter
+    - com.github.tchx84.Flatseal
+    - com.valvesoftware.Steam
+    - org.vinegarhq.Sober
+    - net.davidotek.pupgui2
+  - scope: user
+- type: chezmoi
+  repository: https://github.com/mrkopal/pierdziocha-os
+  disable-update: true
+  file-conflict-policy: skip
+- type: systemd
+  system:
+    enabled:
+    - pierdziocha-update.timer
+    - pierdziocha-flatpak-update.timer
+    - pierdziocha-firstboot.service
+    masked:
+    - bootc-fetch-apply-updates.timer
+    disabled:
+    - initial-setup.service
+- type: script
+  scripts:
+  - preflight-v31.sh
+- type: signing

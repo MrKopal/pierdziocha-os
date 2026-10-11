@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily Pierdziocha OS update check
+
+[Timer]
+OnCalendar=daily
+RandomizedDelaySec=1h
+Persistent=true
+Unit=pierdziocha-update.service
+
+[Install]
+WantedBy=timers.target

@@ -1,0 +1,11 @@
+[Unit]
+Description=Daily Pierdziocha OS Flatpak updates
+
+[Timer]
+OnCalendar=daily
+RandomizedDelaySec=2h
+Persistent=true
+Unit=pierdziocha-flatpak-update.service
+
+[Install]
+WantedBy=timers.target

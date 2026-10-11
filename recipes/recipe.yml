@@ -52,6 +52,7 @@ modules:
     - cinnamon-desktop
     - nemo
     - shadow-utils
+    - lightdm-gtk
 - type: gschema-overrides
   include:
   - zz1-pierdziocha.gschema.override

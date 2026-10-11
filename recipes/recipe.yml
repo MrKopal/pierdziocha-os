@@ -84,8 +84,8 @@ modules:
           - net.davidotek.pupgui2
       - scope: user # Also add Flathub user repo, but no user packages
   - type: chezmoi
-     repository: https://github.com/mrkopal/pierdziocha-os
-     disable-update: true
-     file-conflict-policy: skip
+    repository: https://github.com/mrkopal/pierdziocha-os
+    disable-update: true
+    file-conflict-policy: skip
 
   - type: signing # this sets up the proper policy & signing files for signed images to work fully

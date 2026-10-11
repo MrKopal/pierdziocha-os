@@ -52,7 +52,6 @@ modules:
     - cinnamon-desktop
     - nemo
     - shadow-utils
-    - passwd
 - type: gschema-overrides
   include:
   - zz1-pierdziocha.gschema.override
@@ -83,6 +82,7 @@ modules:
     - bootc-fetch-apply-updates.timer
     disabled:
     - initial-setup.service
+
 - type: script
   scripts:
   - preflight-v31.sh

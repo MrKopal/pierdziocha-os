@@ -5,9 +5,11 @@ Before=display-manager.service
 Conflicts=getty@tty1.service
 RequiresMountsFor=/var/home
 ConditionPathExists=!/var/lib/pierdziocha/firstboot-complete
+Conflicts=plymouth-quit-wait.service
 
 [Service]
 Type=oneshot
+ExecStartPre=-/usr/bin/plymouth quit
 ExecStart=/usr/bin/bash /usr/libexec/pierdziocha-firstboot.sh
 StandardInput=tty-force
 StandardOutput=tty

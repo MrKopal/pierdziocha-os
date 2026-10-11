@@ -17,6 +17,7 @@ modules:
       - source: system
         destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
 
+
   - type: dnf
     repos:
       copr:
@@ -40,16 +41,6 @@ modules:
         - mangohud
         - fastfetch
         - initial-setup-gui
-  - type: systemd
-    system:
-      enabled:
-        - initial-setup.service
-        - pierdziocha-autologin.service
-        - pierdziocha-update.timer
-        - pierdziocha-flatpak-update.timer
-      masked:
-        - bootc-fetch-apply-updates.timer
-
 
     remove:
       packages:
@@ -67,6 +58,16 @@ modules:
         - gnome-screenshot
         - yelp
         - f44-backgrounds-gnome
+  - type: systemd
+    system:
+      enabled:
+        - initial-setup.service
+        - pierdziocha-autologin.service
+        - pierdziocha-update.timer
+        - pierdziocha-flatpak-update.timer
+      masked:
+        - bootc-fetch-apply-updates.timer
+
   - type: gschema-overrides
     include:
       - zz1-pierdziocha.gschema.override

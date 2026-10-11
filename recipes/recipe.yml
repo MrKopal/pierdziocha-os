@@ -37,7 +37,6 @@ modules:
     - micro
     - starship
     - lightdm
-    - slick-greeter
     - kitty
     - flameshot
     - mate-calc
@@ -53,6 +52,12 @@ modules:
     - nemo
     - shadow-utils
     - lightdm-gtk
+- type: dnf
+  remove:
+    auto-remove: false
+    packages:
+    - slick-greeter
+    - slick-greeter-cinnamon
 - type: gschema-overrides
   include:
   - zz1-pierdziocha.gschema.override
